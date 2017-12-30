@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandGTokens implements CommandExecutor {
@@ -89,6 +90,11 @@ public class CommandGTokens implements CommandExecutor {
 						setTokens(sender, playerName, numTokens);
 					}
 
+					// Execute send command
+					else if (command.equalsIgnoreCase("send")) {
+						sendTokens(sender, playerName, numTokens);
+					}
+					
 					// Invalid command
 					else {
 						invalidArguments(sender);
@@ -134,8 +140,7 @@ public class CommandGTokens implements CommandExecutor {
 		database.giveTokens(playerName, tokensToGive);
 
 		// Send success message
-		String message = "&mGave &s" + tokensToGive + " &mwarp tokens to &s"
-				+ Bukkit.getPlayerExact(playerName).getName();
+		String message = "&mGave &s" + tokensToGive + " &mwarp tokens to &s" + database.getPlayerNameExact(playerName);
 		Language.sendMessage(sender, message);
 
 		return true;
@@ -169,7 +174,7 @@ public class CommandGTokens implements CommandExecutor {
 
 		// Send success message
 		String message = "&mTook &s" + tokensToTake + " &mwarp tokens from &s"
-				+ Bukkit.getPlayerExact(playerName).getName();
+				+ database.getPlayerNameExact(playerName);
 		Language.sendMessage(sender, message);
 
 		return true;
@@ -202,11 +207,60 @@ public class CommandGTokens implements CommandExecutor {
 		database.setTokens(playerName, tokensToSet);
 
 		// Send success message
-		String message = "&s" + Bukkit.getPlayerExact(playerName).getName() + " &mnow has &s" + tokensToSet
+		String message = "&s" + database.getPlayerNameExact(playerName) + " &mnow has &s" + tokensToSet
 				+ " &mwarp tokens";
 		Language.sendMessage(sender, message);
 
 		return true;
+	}
+
+	private void sendTokens(CommandSender sender, String playerName, String numTokens) {
+
+		// Exit if player has no permission for this command
+		if (!sender.hasPermission("galacticwarps.tokens.send")) {
+			noPermission(sender);
+			return;
+		}
+
+		// Convert numTokens to an int, if unable to, then exit
+		int tokensToSend = 0;
+		try {
+			tokensToSend = Math.abs(Integer.parseInt(numTokens));
+		} catch (Exception e) {
+			invalidArguments(sender);
+			return;
+		}
+
+		// Exit if player does not exist
+		if (!database.playerExists(playerName)) {
+			playerNotExist(sender, playerName);
+			return;
+		}
+
+		// Get amount of sender's tokens
+		int tokens = database.getTokens(sender.getName());
+
+		// Exit if sender doesn't have enough tokens to send
+		if (tokens < tokensToSend) {
+			Language.sendMessage(sender, "&mYou do not have enough tokens to send that many tokens!");
+			return;
+		}
+
+		// Transfer the tokens
+		database.takeTokens(sender.getName(), tokensToSend);
+		database.giveTokens(playerName, tokensToSend);
+
+		// Send message to sender
+		Language.sendMessage(sender, "&mSuccessfully sent &s" + tokensToSend + " &mwarp tokens to &s"
+				+ database.getPlayerNameExact(playerName) + "&m!");
+
+		// Send message to receiver if they are online
+		Player receiver = Bukkit.getPlayerExact(playerName);
+		if (receiver != null) {
+			Language.sendMessage(receiver, "&mReceived &s" + tokensToSend
+					+ " &mwarp tokens from &s" + sender.getName() + "&m!");
+		}
+
 	}
 
 	private boolean viewTokens(CommandSender sender, String playerName) {

@@ -1,6 +1,6 @@
 name: GalacticWarps
 main: io.github.pkotgire.GalacticWarps.GalacticWarps
-version: 2.0
+version: 2.1
 author: DynamicPoison
 commands:
   gwarp:
@@ -61,6 +61,7 @@ permissions:
             galacticwarps.tokens.set: true
             galacticwarps.tokens.give: true
             galacticwarps.tokens.take: true
+            galacticwarps.tokens.send: true
             galacticwarps.tokens.view: true
             galacticwarps.tokens.view.others: true
             galacticwarps.tokens.free: true
@@ -72,6 +73,9 @@ permissions:
         default: op
     galacticwarps.tokens.take:
         description: Allows taking tokens away from other players
+        default: op
+    galacticwarps.tokens.send:
+        description: Allows sending one's tokens to other players
         default: op
     galacticwarps.tokens.view:
         description: Allows viewing of one's own tokens
