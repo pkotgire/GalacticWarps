@@ -1,27 +1,27 @@
 name: GalacticWarps
 main: io.github.pkotgire.GalacticWarps.GalacticWarps
-version: 1.0
+version: 2.0
 author: DynamicPoison
 commands:
   gwarp:
     description: Command to teleport to galactic warps
     permission: galacticwarps.use
-    usage: /gwarp
+    usage: /gwarp [list/Warp Name]
     aliases: [gw, galacticwarp]
   gtokens:
     description: Command to view a player's galactic tokens
     permission: galacticwarps.use
-    usage: /gtokens [playername]
+    usage: /gtokens [give/take/set/view][playername] {num_tokens}
     aliases: [galactictokens, gwarptokens]
   gsetwarp:
     description: Command to set galactic warps
     permission: galacticwarps.use
-    usage: /gsetwarp
+    usage: /gsetwarp [Warp Name] [Warp Owner Name]
     aliases: [galacticsetwarp, gset]
   gdelwarp:
     description: Command to delete galactic warps
     permission: galacticwarps.use
-    usage: /gsetwarp
+    usage: /gdelwarp [Warp Name]
     aliases: [galacticdeletewarp, gdel, gdelete]
   greload:
     description: Command to reload the GalacticWarps plugin

@@ -227,7 +227,7 @@ public class CommandGTokens implements CommandExecutor {
 		// View other player's tokens if sender has permission
 		if (sender.hasPermission("galacticwarps.tokens.view.others")) {
 			int numTokens = database.getTokens(playerName);
-			String message = "&s" + Bukkit.getPlayerExact(playerName).getName() + " &mhas &s" + numTokens
+			String message = "&s" + database.getPlayerNameExact(playerName) + " &mhas &s" + numTokens
 					+ " &mwarp tokens";
 			Language.sendMessage(sender, message);
 		}

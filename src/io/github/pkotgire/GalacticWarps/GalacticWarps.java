@@ -14,7 +14,7 @@ public class GalacticWarps extends JavaPlugin {
 
 		// Create config if it does not exist
 		registerConfig();
-		
+
 		// Load everything else
 		reload();
 	}

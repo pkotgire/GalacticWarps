@@ -76,7 +76,7 @@ public class Database implements Listener {
 			}
 
 			statement = connection.createStatement();
-		} 
+		}
 
 		String databaseType = (useMySQL) ? "MySQL" : "SQLite";
 		plugin.println("Succsesfully connected to " + databaseType + " database!");
