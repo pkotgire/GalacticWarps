@@ -1,0 +1,21 @@
+# GalacticWarps by DynamicPoison
+# Version 1.0
+
+# If you prefer to use MySQL for data storage, set "use-mysql" to true (Optional)
+use-mysql: false
+table-prefix: 'gw_'
+host: 'localhost'
+port: 3306
+database: 'GalacticWarps'
+username: 'root'
+password: ''
+
+# Refund tokens when a warp is deleted?
+refund-tokens: true
+
+# Prefix for Plugin (Used in chat) (Supports color codes)
+chat-prefix: '&8[&3Gala&cctic&8]'
+
+# Color codes to be used by plugin in chat (Valid codes are '&[0-9]' and '&[a-f]')
+main-color-code: '&3'
+special-color-code: '&c'

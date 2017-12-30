@@ -1,0 +1,105 @@
+name: GalacticWarps
+main: io.github.pkotgire.GalacticWarps.GalacticWarps
+version: 1.0
+author: DynamicPoison
+commands:
+  gwarp:
+    description: Command to teleport to galactic warps
+    permission: galacticwarps.use
+    usage: /gwarp
+    aliases: [gw, galacticwarp]
+  gtokens:
+    description: Command to view a player's galactic tokens
+    permission: galacticwarps.use
+    usage: /gtokens [playername]
+    aliases: [galactictokens, gwarptokens]
+  gsetwarp:
+    description: Command to set galactic warps
+    permission: galacticwarps.use
+    usage: /gsetwarp
+    aliases: [galacticsetwarp, gset]
+  gdelwarp:
+    description: Command to delete galactic warps
+    permission: galacticwarps.use
+    usage: /gsetwarp
+    aliases: [galacticdeletewarp, gdel, gdelete]
+  greload:
+    description: Command to reload the GalacticWarps plugin
+    permission: galacticwarps.use
+    usage: /greload 
+    aliases: [galacticreload]
+permissions:
+    galacticwarps.*:
+        description: Gives access to all galacticwarps related commands
+        default: op
+        children:
+            galacticwarps.use: true
+            galacticwarps.warp.others: true
+            galacticwarps.warp.list: true
+            galacticwarps.tokens.*: true
+            galacticwarps.set.others: true
+            galacticwarps.delete.others: true
+            galacticwarps.reload: true
+    galacticwarps.use:
+        description: Lets you get rid of the disgusting bukkit message
+        default: true
+    galacticwarps.warp.others:
+        description: Lets you teleport other players to galactic warps
+        default: op
+        children:
+            galacticwarps.warp: true
+    galacticwarps.warp:
+        description: Lets you teleport to galactic warps
+        default: op
+    galacticwarps.warp.list:
+        description: Lets you list of warps
+        default: op
+    galacticwarps.tokens.*:
+        description: Allows access to all token related commands
+        default: op
+        children:
+            galacticwarps.tokens.set: true
+            galacticwarps.tokens.give: true
+            galacticwarps.tokens.take: true
+            galacticwarps.tokens.view: true
+            galacticwarps.tokens.view.others: true
+            galacticwarps.tokens.free: true
+    galacticwarps.tokens.set:
+        description: Allows setting of other players tokens
+        default: op
+    galacticwarps.tokens.give:
+        description: Allows giving other players tokens
+        default: op
+    galacticwarps.tokens.take:
+        description: Allows taking tokens away from other players
+        default: op
+    galacticwarps.tokens.view:
+        description: Allows viewing of one's own tokens
+        default: op
+    galacticwarps.tokens.view.others:
+        description: Allows viewing of others' tokens
+        default: op
+        children:
+            galacticwarps.tokens.view: true
+    galacticwarps.tokens.free:
+        description: Allows player to not need tokens to create warp
+        default: op
+    galacticwarps.set:
+        description: Allows setting a galactic warp for oneself
+        default: op
+    galacticwarps.set.others:
+        description: Allows setting a galactic warp for others
+        default: op
+        children:
+            galacticwarps.set: true
+    galacticwarps.delete:
+        description: Allows deleting a galactic warp for oneself
+        default: op
+    galacticwarps.delete.others:
+        description: Allows deleting a galactic warp for others
+        default: op
+        children:
+            galacticwarps.delete: true
+    galacticwarps.reload:
+        description: Allows reloading the plugin
+        default: op
